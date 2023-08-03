@@ -44,4 +44,15 @@ public class UserManager {
         }
         return responseList;
     }
+
+    public GetUserResponse findUserById(String id){
+        User user = userDao.fetchUserById(id);
+        return new GetUserResponse(user.getId(),user.getUsername(),user.getAge(),user.getUpdatedphone());
+    }
+
+    public boolean deleteUserById(String id)
+    {
+        userDao.deleteById(id);
+        return true;
+    }
 }
