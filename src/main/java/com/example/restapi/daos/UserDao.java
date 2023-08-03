@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 
@@ -49,5 +50,14 @@ public class UserDao{
     public void deleteById(String id){
         Query query = new Query(Criteria.where("_id").is(id));
         mongoTemplate.remove(query, User.class);
+    }
+
+    public void updateById(String id,String updatedName, String updatedPassword)
+    {
+        Update update = new Update();
+        update.set("username",updatedName);
+        update.set("password",updatedPassword);
+        Query query = new Query(Criteria.where("_id").is(id));
+        mongoTemplate.updateFirst(query, update, User.class);
     }
 }

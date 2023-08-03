@@ -3,6 +3,7 @@ package com.example.restapi.controllers;
 
 import com.example.restapi.managers.UserManager;
 import com.example.restapi.requests.CreateRequest;
+import com.example.restapi.requests.UpdateRequest;
 import com.example.restapi.responses.CreateUserResponse;
 import com.example.restapi.responses.GetUserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,10 @@ public class UserController {
         else {
             return "Some Error Occured";
         }
+    }
+
+    @RequestMapping(value = "/user/updateUser",method = RequestMethod.PATCH)
+    public String updateUser(@RequestBody UpdateRequest updateRequest){
+        return userManager.updateUserById(updateRequest);
     }
 }
