@@ -1,11 +1,14 @@
 package com.example.restapi.daos;
 
+import org.bson.types.ObjectId;
 
 import com.example.restapi.entities.User;
 import com.example.restapi.requests.CreateRequest;
 import com.example.restapi.responses.CreateUserResponse;
+import com.example.restapi.responses.GetUserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
@@ -39,4 +42,12 @@ public class UserDao{
         return createUserResponse;
     }
 
+    public User fetchUserById(String id){
+        return mongoTemplate.findById(new ObjectId(id),User.class);
+    }
+
+    public void deleteById(String id){
+        Query query = new Query(Criteria.where("_id").is(id));
+        mongoTemplate.remove(query, User.class);
+    }
 }
