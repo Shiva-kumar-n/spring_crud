@@ -30,10 +30,12 @@ public class UserManager {
 
     public CreateUserResponse createUser(CreateRequest createRequest){
 
-        createRequest.setUpdatedphone("+91 "+createRequest.getPhonenumber());
-        createRequest.setIsverfied(false);
-
-        return userDao.createUser(createRequest);
+        if(createRequest.isValid()){
+            createRequest.setUpdatedphone("+91 "+createRequest.getPhonenumber());
+            createRequest.setIsverfied(false);
+            return userDao.createUser(createRequest);
+        }
+        return new CreateUserResponse(null,false,null);
     }
 
 

@@ -18,10 +18,10 @@ public class User {
     private String email;
     private boolean isverfied;
     private String updatedphone;
-//    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
-//    private Timestamp updatedAt = new Timestamp(System.currentTimeMillis());
-//    private String updatedBy = "System";
 
+    private Long lastupdated;
+    private  Long createdAt;
+    private String createdBy;
 
 
     public void setValueUsingCreateRequest(CreateRequest createRequest){
@@ -32,6 +32,9 @@ public class User {
         this.isverfied = createRequest.isIsverfied();
         this.email = createRequest.getEmail();
         this.updatedphone = createRequest.getUpdatedphone();
+        this.lastupdated = System.currentTimeMillis();
+        this.createdAt = System.currentTimeMillis();
+        this.createdBy = "System";
     }
 
 

@@ -57,6 +57,7 @@ public class UserDao{
         Update update = new Update();
         update.set("username",updatedName);
         update.set("password",updatedPassword);
+        update.set("lastupdated", System.currentTimeMillis());
         Query query = new Query(Criteria.where("_id").is(id));
         mongoTemplate.updateFirst(query, update, User.class);
     }
